@@ -1,12 +1,16 @@
 const yargs = require('yargs')
 const notes = require('./notes');
+var geocode = require('./geolocation/geolocation');
+var whethercode = require('./whether/whether');
 
 const args=yargs.argv;
-const command =args._[0]
-if(command=='add'){
-    notes.addNote(args.title, args.body)
-} else if(command=='remove'){
-    var removedNotes=notes.removeNote(args.title)
-    var message = removedNotes ? "notes removed!":" notes not found";
-    console.log(message)
-}
+const address =encodeURIComponent(args._[0])
+geocode.getfullLocationDetail(address, res =>{
+    console.log(res)
+    if(res){
+        whethercode.getWhether(res.lat, res.lng, response =>{
+            console.log(response.currently)
+        })
+    }
+    
+})

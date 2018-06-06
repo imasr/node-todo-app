@@ -13,12 +13,9 @@ var addNote=(title,body)=>{
 	if(duplicateString.length==0){
 		notes.push(note)
 		saveNote(notes);
-		
 	} else{
 		console.log(title ,'!. already exist')
 	}
-
-
 }
 var saveNote =(notes) =>{
 	fs.writeFileSync('notes.json', JSON.stringify(notes));
@@ -39,9 +36,16 @@ var removeNote=(title)=>{
 	saveNote(duplicateString);
 	return notes.length !== duplicateString.length
 }
+logNotes=(note) =>{
+    console.log('--')
+    console.log('title',  note.title)
+    console.log('title',  note.body)
+}
 
-module.exports ={
+
+module.exports = {
 	addNote,
 	getNote,
-	removeNote
+	removeNote,
+	logNotes
 }
