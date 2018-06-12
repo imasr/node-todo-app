@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
-mongoose.connect('mongodb://localhost:27017/TodoApp')
+import { mongodb_port } from './../config';
+
+mongoose.connect(mongodb_port)
 
 var db=mongoose.connection;
 db.on('error',console.error.bind(console, 'connection error:'));
@@ -7,6 +9,6 @@ db.once('open', ()=>{
     console.log('connected')
 })
 
-export default {
+module.exports= {
     mongoose
 };
