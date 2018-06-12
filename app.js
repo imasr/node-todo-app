@@ -1,16 +1,8 @@
-const yargs = require('yargs')
-const notes = require('./notes');
-var geocode = require('./geolocation/geolocation');
-var whethercode = require('./whether/whether');
+import express from 'express';
+import mongoose from './mongoDb/db';
+import bodyParser from 'body-parser';
 
-const args=yargs.argv;
-const address =encodeURIComponent(args._[0])
-geocode.getfullLocationDetail(address, res =>{
-    console.log(res)
-    if(res){
-        whethercode.getWhether(res.lat, res.lng, response =>{
-            console.log(response.currently)
-        })
-    }
-    
+var app=express();
+app.listen('3000', ()=>{
+    console.log('Port 3000 Started');
 })
